@@ -1,0 +1,38 @@
+extends layout
+
+block content
+  #data  
+    h2= title
+    h3 Update an Menu item
+
+    .row
+      form(method='POST' action='/menu/edititem/'+item._id)
+        div.form-group
+          label(for='name') Dish Name :
+          input#name.form-control(type='text', value=item.name, name='name', required='isRequired')
+        div.form-group
+          label(for='price') Price :
+          input#price.form-control(type='number', step='.01', value=item.price, name='price' required='isRequired')
+        div.form-group
+          label(for='ingredients') Ingredients :
+          input#ingredients.form-control(type='text', value=item.ingredients, name='ingredients')
+        label(for='available') Item Available ?
+        if item.available
+          .form-check
+            input.form-check-input#yes(type='radio' name='available' value=1 checked)
+            label.form-check-label(for='yes')
+              | Yes
+          .form-check
+            input.form-check-input#no(type='radio' name='available' value=0)
+            label.form-check-label(for='no')
+              | No            
+        else
+          .form-check
+            input.form-check-input#yes(type='radio' name='available' value=1)
+            label.form-check-label(for='yes')
+              | Yes
+          .form-check
+            input.form-check-input#no(type='radio' name='available' value=0 checked)
+            label.form-check-label(for='no')
+              | No
+        button.btn.btn-primary(type='submit') Update an Item

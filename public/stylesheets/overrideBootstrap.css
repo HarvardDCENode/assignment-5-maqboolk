@@ -1,0 +1,15 @@
+ul{
+    padding: 0px;
+}
+
+li img{
+	width: 380px;
+}
+
+table a {
+    margin-left: 10px;
+}
+
+form label{
+    font-weight: bold;
+}

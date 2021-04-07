@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  #data
+    h2= title
+    p#assignment5 Welcome to #{title} Note: A5 Tab contains assignement-5 REST API's
+    
+
+    #imgContainer
+      ul
+        each image in images
+          li
+            img(src="/images/"+image+"-image.png")
+  

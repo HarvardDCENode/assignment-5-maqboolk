@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  #data  
+    #requestContainer
+      if requests.length > 0
+        h2= title
+        p  Requests Details
+        ul
+          each req in requests
+            li.request 
+              div Name: #{req.name} 
+              div Email: #{req.email}
+      else
+        
+        h2 No Requests available..        
