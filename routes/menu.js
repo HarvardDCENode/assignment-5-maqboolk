@@ -5,7 +5,7 @@ var app = express();
 const Menu = require('../models/menuModel');
 
 /* GET menu page. 
-Route to list all meiu items from database*/
+Route to list all menu items from database*/
 router.get('/', (req, res, next) => {
     Menu.find({})
         .then((menu) => {

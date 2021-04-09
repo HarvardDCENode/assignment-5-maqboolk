@@ -12,6 +12,7 @@ var indexRouter = require('./routes/index');
 var requestFormRouter = require('./routes/requestForm');
 var allRequestsRouter = require('./routes/allRequests');
 var menuRouter = require('./routes/menu');
+var apiMenuRouter = require('./routes/api-menu');
 
 const app = express();
 
@@ -32,10 +33,14 @@ app.use(session({
 // using body parser to get data from form
 app.use(bodyparser.urlencoded({ extended: false }));
 
+// Handles json data when REST API is called
+//if we dont use,  it will display html page source.
+app.use(express.json());
+
 //favicon
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
-//view engine piug setup
+//view engine pug setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
@@ -45,7 +50,7 @@ app.use('/', indexRouter);
 app.use('/request', requestFormRouter);
 app.use('/allrequests', allRequestsRouter);
 app.use('/menu', menuRouter);
-//app.use('/delete/:id', menuRouter);
+app.use('/api/menu', apiMenuRouter);
 
 // catch 404 and forward to error handler - copied from experess generated project
 app.use(function (req, res, next) {
