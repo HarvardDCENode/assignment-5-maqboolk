@@ -38,7 +38,7 @@ router.post('/', (req, res, next) => {
 
 // Remove an item from database using its id
 router.get('/delete/:id', (req, res, next) => {
-    Menu.findByIdAndDelete(req.params.id)
+    MenuController.MenuService.deleteAnItem(req.params.id)
         .then(() => {
             console.log('Menu item with id "' + req.params.id + '" deleted successfully.');
             res.redirect('/menu');

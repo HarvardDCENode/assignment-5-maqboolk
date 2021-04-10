@@ -34,6 +34,18 @@ class MenuService {
             });
     }
 
+    // Update an item
+
+    // Delete an item
+
+    static deleteAnItem(itemId) {
+        return Menu.findByIdAndDelete({ _id: itemId })
+            .then((obj) => {
+                console.log('-- Deleted --');
+                console.log(obj);
+                return obj;
+            })
+    }
 
 } // end of MenuService class
 
