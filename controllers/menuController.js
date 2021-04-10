@@ -34,16 +34,23 @@ class MenuService {
             });
     }
 
+    // get one menu item form DB
+    static getAnItem(itemId) {
+        return Menu.findById({ _id: itemId })
+            .then((item) => {
+                console.log(item);
+                return item;
+            });
+    }
+
     // Update an item
 
     // Delete an item
-
     static deleteAnItem(itemId) {
         return Menu.findByIdAndDelete({ _id: itemId })
-            .then((obj) => {
-                console.log('-- Deleted --');
-                console.log(obj);
-                return obj;
+            .then((item) => {
+                console.log(item);
+                return item;
             })
     }
 

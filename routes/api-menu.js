@@ -45,14 +45,32 @@ router.post('/', (req, res, next) => {
  * R = Read - Retrieving all menu items from the DB.
  * using res.json insead of res.send(JSON.stringify()), 
  * */
-router.get('/', async (req, res, next) => {
-    console.log('Read API-------------');
+router.get('/', (req, res, next) => {
+    console.log('Gettign all items.');
     MenuController.MenuService.getAllItems()
         .then((menu) => {
             res.json(menu);
         });
 });
 
+/**
+ * R = Read - Retrieving only one menu item by Id from the DB.
+ * using res.json insead of res.send(JSON.stringify()), 
+ * */
+router.get('/:id', (req, res, next) => {
+    MenuController.MenuService.getAnItem(req.params.id)
+        .then((item) => {
+            if (item === null) {
+                throw Error;
+            }
+            res.status(200);
+            res.json(item);
+        })
+        .catch((err) => {
+            res.status(404);
+            res.send('Item not Found..');
+        });
+});
 
 
 // U = Update
@@ -63,13 +81,16 @@ router.get('/', async (req, res, next) => {
  * */
 router.delete('/:id', (req, res, next) => {
     MenuController.MenuService.deleteAnItem(req.params.id)
-        .then((deltedItem) => {
+        .then((deletedItem) => {
+            if (deletedItem === null) {
+                throw Error;
+            }
             res.status(200);
-            res.json(deltedItem);
+            res.json(deletedItem);
         })
         .catch((err) => {
             res.status(404);
-            res.end();
+            res.send('No item found.');
         });
 });
 
