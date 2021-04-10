@@ -3,11 +3,12 @@ var router = express.Router();
 var app = express();
 
 const Menu = require('../models/menuModel');
+const MenuController = require('../controllers/menuController');
 
 /* GET menu page. 
 Route to list all menu items from database*/
 router.get('/', (req, res, next) => {
-    Menu.find({})
+    MenuController.MenuService.getAllItems()
         .then((menu) => {
             //console.log(menu);
             res.render('menu', {
@@ -26,8 +27,7 @@ router.get('/', (req, res, next) => {
 // Add menu item to Database
 // Route to create an item
 router.post('/', (req, res, next) => {
-    var menuitem = new Menu(req.body);
-    menuitem.save()
+    MenuController.MenuService.createAnItem(req.body)
         .then(() => {
             res.redirect('/menu');
         })

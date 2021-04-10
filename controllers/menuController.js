@@ -7,18 +7,29 @@ const Menu = require('../models/menuModel');
 
 class MenuService {
 
-    // get all menu items
+    // Create a menu item in DB
+    static createAnItem(reqBody) {
+        var menuitem = new Menu(reqBody);
+        return menuitem.save()
+            .then((item) => {
+                console.log('Menu Item created successfully...........');
+                console.log(item);
+                return item;
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
+    // get all menu items form DB
     static getAllItems() {
         return Menu.find({})
             .then((menu) => {
-                // console.log('# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #');
-                // console.log(menu);
                 return menu;
             })
             .catch((err) => {
                 if (err) {
                     console.log(err);
-                    res.end('ERROR!');
                 }
             });
     }
