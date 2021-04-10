@@ -26,8 +26,7 @@ router.use((req, res, next) => {
 
 // CRUD API's for menu * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 /**  C = Creating a menu item in the DB
-* using res.json insead of  res.send(JSON.stringify()), 
-* res.json sets the content type to json
+* using res.json insead of res.send(JSON.stringify()), 
 */
 router.post('/', (req, res, next) => {
 
@@ -44,8 +43,7 @@ router.post('/', (req, res, next) => {
 
 /**
  * R = Read - Retrieving all menu items from the DB.
- * using res.json insead of  res.send(JSON.stringify()), 
- * res.json sets the content type to json
+ * using res.json insead of res.send(JSON.stringify()), 
  * */
 router.get('/', async (req, res, next) => {
     console.log('Read API-------------');
@@ -59,8 +57,10 @@ router.get('/', async (req, res, next) => {
 
 // U = Update
 
-// D = Delete
-
+/**
+ * D = Delete - Delete an menu item by id from the DB.
+ * using res.json insead of res.send(JSON.stringify())
+ * */
 router.delete('/:id', (req, res, next) => {
     MenuController.MenuService.deleteAnItem(req.params.id)
         .then((deltedItem) => {
