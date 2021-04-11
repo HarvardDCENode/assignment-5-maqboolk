@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var app = express();
 
-const Menu = require('../models/menuModel');
 const MenuController = require('../controllers/menuController');
 
 /* GET menu page. 
@@ -51,12 +50,12 @@ router.get('/delete/:id', (req, res, next) => {
 // Edit an existing item and save to database
 // GET for edit
 router.get('/edititem/:id', (req, res, next) => {
-    Menu.findOne({ '_id': req.params.id })
+    MenuController.MenuService.getAnItem(req.params.id)
         .then((item) => {
+            console.log('Menu item with id "' + req.params.id + '" found.');
             res.render('editItem', {
                 item: item,
             });
-            //res.redirect('/menu');
         })
         .catch((err) => {
             console.log(err);
@@ -65,23 +64,14 @@ router.get('/edititem/:id', (req, res, next) => {
 
 // POST for edit
 router.post('/edititem/:id', (req, res, next) => {
-    var modifiedItem = {
-        name: req.body.name,
-        price: req.body.price,
-        ingredients: req.body.ingredients,
-        available: req.body.available
-    };
-
-    Menu.findOne({ '_id': req.params.id })
+    console.log(req.body);
+    MenuController.MenuService.updateAnItem(req.params.id, req.body)
         .then((item) => {
-            item.set(req.body);
-            item.save().then(() => {
-                res.redirect('/menu');
-            });
+            res.redirect('/menu');
         })
         .catch((err) => {
             if (err) console.log(err);
-        });
+        })
 });
 
 // Error 

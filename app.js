@@ -16,7 +16,7 @@ var apiMenuRouter = require('./routes/api-menu');
 
 const app = express();
 
-mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PWD}@cluster0.gpujc.mongodb.net/test?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PWD}@cluster0.gpujc.mongodb.net/test?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
     .catch((err) => {
         console.error(`database connection error: ${err}`);
         process.exit();

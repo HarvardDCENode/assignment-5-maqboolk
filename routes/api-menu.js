@@ -25,11 +25,11 @@ router.use((req, res, next) => {
 
 
 // CRUD API's for menu * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-/**  C = Creating a menu item in the DB
-* using res.json insead of res.send(JSON.stringify()), 
-*/
+/** API
+ * C = Creating a menu item in the DB
+ * using res.json insead of res.send(JSON.stringify()).
+ */
 router.post('/', (req, res, next) => {
-
     MenuController.MenuService.createAnItem(req.body)
         .then((CreatedItem) => {
             res.status(201);
@@ -41,7 +41,7 @@ router.post('/', (req, res, next) => {
 });
 
 
-/**
+/** API
  * R = Read - Retrieving all menu items from the DB.
  * using res.json insead of res.send(JSON.stringify()), 
  * */
@@ -53,7 +53,7 @@ router.get('/', (req, res, next) => {
         });
 });
 
-/**
+/** API
  * R = Read - Retrieving only one menu item by Id from the DB.
  * using res.json insead of res.send(JSON.stringify()), 
  * */
@@ -72,11 +72,28 @@ router.get('/:id', (req, res, next) => {
         });
 });
 
+/** API
+ * U = Update - Update a menu item by its id.
+ * using res.json insead of res.send(JSON.stringify())
+ * */
+router.put('/:id', (req, res, next) => {
+    console.log(req.body);
+    MenuController.MenuService.updateAnItem(req.params.id, req.body)
+        .then((item) => {
+            if (item === null) {
+                throw Error;
+            }
+            res.status(200);
+            res.json(item);
+        })
+        .catch((err) => {
+            res.status(404);
+            res.send('No item found.');
+        });
+})
 
-// U = Update
-
-/**
- * D = Delete - Delete an menu item by id from the DB.
+/** API
+ * D = Delete - Delete a menu item by id from the DB.
  * using res.json insead of res.send(JSON.stringify())
  * */
 router.delete('/:id', (req, res, next) => {
