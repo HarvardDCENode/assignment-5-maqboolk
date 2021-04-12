@@ -14,7 +14,7 @@ router.use((req, res, next) => {
         'Access-Control-Allow-Origin': '*',
         // Allow methods and headers for 'preflight'
         'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers',
     });
     // if this is a preflight, we're done and can send the response with our headers
     if (req.method == 'OPTIONS') {
@@ -28,6 +28,7 @@ router.use((req, res, next) => {
 /** API
  * C = Creating a menu item in the DB
  * using res.json insead of res.send(JSON.stringify()).
+ * res.json takes care of response and contenttype to json.
  */
 router.post('/', (req, res, next) => {
     MenuController.MenuService.createAnItem(req.body)
@@ -44,6 +45,7 @@ router.post('/', (req, res, next) => {
 /** API
  * R = Read - Retrieving all menu items from the DB.
  * using res.json insead of res.send(JSON.stringify()), 
+ * res.json takes care of response and contenttype to json.
  * */
 router.get('/', (req, res, next) => {
     console.log('Gettign all items.');
@@ -56,6 +58,7 @@ router.get('/', (req, res, next) => {
 /** API
  * R = Read - Retrieving only one menu item by Id from the DB.
  * using res.json insead of res.send(JSON.stringify()), 
+ * res.json takes care of response and contenttype to json.
  * */
 router.get('/:id', (req, res, next) => {
     MenuController.MenuService.getAnItem(req.params.id)
@@ -75,6 +78,7 @@ router.get('/:id', (req, res, next) => {
 /** API
  * U = Update - Update a menu item by its id.
  * using res.json insead of res.send(JSON.stringify())
+ * res.json takes care of response and contenttype to json.
  * */
 router.put('/:id', (req, res, next) => {
     console.log(req.body);
@@ -95,6 +99,7 @@ router.put('/:id', (req, res, next) => {
 /** API
  * D = Delete - Delete a menu item by id from the DB.
  * using res.json insead of res.send(JSON.stringify())
+ * res.json takes care of response and contenttype to json.
  * */
 router.delete('/:id', (req, res, next) => {
     MenuController.MenuService.deleteAnItem(req.params.id)
