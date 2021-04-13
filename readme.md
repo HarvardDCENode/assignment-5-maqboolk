@@ -8,6 +8,6 @@ You should build your application in this repo cloned for you in Github Classroo
 Assignment 5 REST API can be tested in the A5 (REST) tab on home page.
 Note: Please open borwser console to see output of each API's
 
-/public/javascripts/api.js - inclues test for all API's
-/routes/api-menu.js - includes all the API
-/controller.menuController.js - file contains Data service class that is used in api-menu.js for API's and menu.js for routes .
+- /public/javascripts/api.js - inclues test for all API's
+- /routes/api-menu.js - includes all the API
+- /controller.menuController.js - file contains Data service class that is used in api-menu.js for API's and menu.js for routes .
