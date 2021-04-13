@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var app = express();
 
 const MenuController = require('../controllers/menuController');
 
@@ -14,7 +13,9 @@ router.use((req, res, next) => {
         'Access-Control-Allow-Origin': '*',
         // Allow methods and headers for 'preflight'
         'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Credentials': true
     });
     // if this is a preflight, we're done and can send the response with our headers
     if (req.method == 'OPTIONS') {
@@ -48,7 +49,7 @@ router.post('/', (req, res, next) => {
  * res.json takes care of response and contenttype to json.
  * */
 router.get('/', (req, res, next) => {
-    console.log('Gettign all items.');
+    console.log('Getting all items.');
     MenuController.MenuService.getAllItems()
         .then((menu) => {
             res.json(menu);
